@@ -1,14 +1,41 @@
-import React from 'react';
-import {useLocation} from "react-router-dom";
+import {React, useState} from 'react';
+import {useLocation, useNavigate} from "react-router-dom";
 import AppBarNormal from "../components/AppBarNormal";
-import {Box, Button, Card, CardActionArea, CardActions, CardContent, Divider, Grid, TextField} from "@mui/material";
-import { DataGrid } from '@mui/x-data-grid';
+import {Alert, Button, Card, CardContent, Divider, Grid, Snackbar} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ApplicantDetails from "../components/ApplicantDetails";
+import DELETE_APPLICANT from "../mutations/deleteApplicant";
+import {useMutation} from "@apollo/client";
+import getAllQuery from "../queries/getAllQuery";
 const Detail = () => {
+    const [open, setOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const {applicant} = location.state;
     console.log(applicant);
+    const [deleteApplicant ,{ data, loading, error }] = useMutation(DELETE_APPLICANT);
+    console.log({data, loading, error});
+    const removeApplicant = () => {
+        deleteApplicant({
+            variables: {
+                id: applicant.id
+            },
+            refetchQueries: [
+                {query: getAllQuery},
+                'GetUsers'
+            ],
+        });
+        setOpen(true);
+    }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+        navigate("/");
+    };
 
     return (
         <div>
@@ -38,9 +65,14 @@ const Detail = () => {
             </Grid>
             <Grid container  direction='row' justifyContent='center' mt={5}  >
                 <Grid item md={4} textAlign='center' >
-                    <Button variant="contained" color="error">Delete</Button>
+                    <Button variant="contained" color="error" onClick={removeApplicant}>Delete</Button>
                 </Grid>
             </Grid>
+            <Snackbar  mt={2} open={open} autoHideDuration={2000} onClose={handleClose}  anchorOrigin={{ vertical: "bottom", horizontal:'center', }}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' ,margin:'%10'}}>
+                    User deleted successfully
+                </Alert>
+            </Snackbar>
         </div>
     );
 };
