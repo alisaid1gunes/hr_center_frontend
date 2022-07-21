@@ -14,12 +14,15 @@ const ApplicantDetails = (props) => {
                         <Grid container direction='row' >
                             <Grid item md={6} justifyContent='left'>
                                 <Typography variant="h6" color="text.secondary" textAlign='left' >
-                                    {`${key}: `}
+                                    {`${key}:  `}
                                 </Typography>
                             </Grid>
                             <Grid item md={6} justifyContent='end'textAlign='right' >
                                 <Typography variant="h6" color="text.secondary" >
-                                    {applicant[valueKeys[index]]}
+                                    {
+                                      key === 'Salary Expectation' ? `${applicant[valueKeys[index]]} TL` : applicant[valueKeys[index]]
+                                    }
+
                                 </Typography>
                             </Grid>
                         </Grid>
