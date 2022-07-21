@@ -22,7 +22,7 @@ const Detail = () => {
             },
             refetchQueries: [
                 {query: getAllQuery},
-                'GetUsers'
+                'users'
             ],
         });
         setOpen(true);

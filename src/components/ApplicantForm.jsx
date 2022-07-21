@@ -1,7 +1,11 @@
-import React from 'react';
+import {React} from 'react';
 import {Card, CardContent, Grid, TextField} from "@mui/material";
 
-const ApplicantForm = () => {
+const ApplicantForm = (props) => {
+    const {firstName, setFirstName, lastName, setLastName, age, setAge,
+        email, setEmail, city, setCity, address, setAddress, phone, setPhone, jobTitle,
+        setJobTitle, salaryExpectation, setSalaryExpectation, country, setCountry }=props;
+
     return (
         <div>
             <Grid container justifyContent="center" >
@@ -12,6 +16,8 @@ const ApplicantForm = () => {
                                 <Grid container direction="row" justifyContent="center" alignItems="center" md={12} spacing={0}>
                                     <Grid item md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Firstname"
@@ -20,7 +26,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Lastname"
@@ -29,7 +36,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={age}
+                                            onChange={(e) => setAge(e.target.value)}
                                             margin={'dense'}
                                             type="number"
                                             label="Age"
@@ -38,7 +46,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Email"
@@ -47,7 +56,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Phone"
@@ -56,16 +66,18 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={address}
+                                            onChange={(e) => setAddress(e.target.value)}
                                             margin={'dense'}
-                                            type="number"
+                                            type="text"
                                             label="Address"
                                             variant="outlined"
                                         />
                                     </Grid>
                                     <Grid item md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="City"
@@ -73,7 +85,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Country"
@@ -81,7 +94,8 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
-
+                                            value={jobTitle}
+                                            onChange={(e) => setJobTitle(e.target.value)}
                                             margin={'dense'}
                                             type="text"
                                             label="Job Title"
@@ -89,8 +103,10 @@ const ApplicantForm = () => {
                                     </Grid>
                                     <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center'>
                                         <TextField
+                                            value={salaryExpectation}
+                                            onChange={(e) => setSalaryExpectation(e.target.value)}
                                             margin={'dense'}
-                                            type="text"
+                                            type="number"
                                             label="Salary Expectation"
                                             variant="outlined"/>
                                     </Grid>
