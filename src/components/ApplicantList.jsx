@@ -8,7 +8,7 @@ const ApplicantList = (props) => {
     const {applicants} = props;
     const applicantList = JSON.parse(applicants);
     console.log(applicantList);
-    var cardStyle = {
+    const cardStyle = {
         width: '35vw',
     }
 
