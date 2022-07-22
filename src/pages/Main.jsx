@@ -17,9 +17,9 @@ const Main = () => {
     const handleClick = () => {
         navigate("/new");
     }
-    console.log(applicants)
     return (
         <div>
+            {console.log(search)}
             <SearchAppBar search={search} setSearch={setSearch}/>
             <Container maxWidth={"xl"} style={{ background: '#f2f6fc' ,height:'100vh' }}>
                 <Grid

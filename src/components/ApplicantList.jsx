@@ -1,13 +1,16 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {Button, Box,Card, CardActionArea, CardContent, CardMedia, Grid} from "@mui/material";
+import {Box,Card, CardActionArea, CardContent, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 const ApplicantList = (props) => {
     const navigate = useNavigate();
-    const {applicants} = props;
+    const {applicants,search} = props;
     const applicantList = JSON.parse(applicants);
     console.log(applicantList);
+    const filteredApplicants = applicantList.filter(applicant => {
+        return applicant.firstName.toLowerCase().includes(search.toLowerCase());
+    })
     const cardStyle = {
         width: '35vw',
     }
@@ -17,7 +20,7 @@ const ApplicantList = (props) => {
     }
     return (
         <div>
-            {applicantList.map((applicant) => {
+            {filteredApplicants.map((applicant) => {
                 return (
                     <Grid container justifyContent="center" alignItems="center" key={applicant.id} >
                         <Grid item md={4} >
