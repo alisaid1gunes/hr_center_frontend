@@ -32,7 +32,6 @@ const Detail = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
         navigate("/");
     };
@@ -70,7 +69,7 @@ const Detail = () => {
             </Grid>
             <Snackbar  mt={2} open={open} autoHideDuration={2000} onClose={handleClose}  anchorOrigin={{ vertical: "bottom", horizontal:'center', }}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' ,margin:'%10'}}>
-                    User deleted successfully
+                    Applicant deleted successfully
                 </Alert>
             </Snackbar>
         </div>

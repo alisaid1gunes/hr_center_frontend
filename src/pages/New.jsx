@@ -1,13 +1,15 @@
 import {React, useState} from 'react';
 import AppBarNormal from "../components/AppBarNormal";
 import ApplicantForm from "../components/ApplicantForm";
-import {Button, Grid} from "@mui/material";
+import {Alert, Button, Grid, Snackbar} from "@mui/material";
 import {useMutation} from "@apollo/client";
+import {useNavigate} from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
 
 const New = () => {
-    const [applicant, setApplicant] = useState();
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [age, setAge] = useState();
@@ -47,9 +49,18 @@ const New = () => {
 
     }
     const onClick = () => {
-        console.log(age, typeof age);
         addApplicant();
+        setOpen(true);
+
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+        navigate("/");
+    };
 
     return (
         <div>
@@ -89,6 +100,11 @@ const New = () => {
                     </Button>
                 </Grid>
             </Grid>
+            <Snackbar  mt={2} open={open} autoHideDuration={2000} onClose={handleClose}  anchorOrigin={{ vertical: "bottom", horizontal:'center', }}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' ,margin:'%10'}}>
+                    Applicant created successfully
+                </Alert>
+            </Snackbar>
         </div>
     );
 };
