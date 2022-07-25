@@ -20,10 +20,12 @@ const New = () => {
     const [country, setCountry] = useState('');
     const [salaryExpectation, setSalaryExpectation] = useState();
     const [jobTitle, setJobTitle] = useState('');
+    const [file, setFile] = useState('');
 
     const [createApplicant, {data, loading, error}] = useMutation(CREATE_APPLLICANT);
 
     const addApplicant = () => {
+        console.log(file)
         createApplicant({
             variables: {
                 data: {
@@ -37,8 +39,8 @@ const New = () => {
                     country,
                     salaryExpectation: parseInt(salaryExpectation),
                     jobTitle
-                }
-
+                },
+                file
 
             },
             refetchQueries: [
@@ -92,6 +94,8 @@ const New = () => {
                 setSalaryExpectation={setSalaryExpectation}
                 jobTitle={jobTitle}
                 setJobTitle={setJobTitle}
+                file={file}
+                setFile={setFile}
             />
             <Grid container md={12} direction='row' justifyContent="center" mt={5}>
                 <Grid item md={6} textAlign='center'>

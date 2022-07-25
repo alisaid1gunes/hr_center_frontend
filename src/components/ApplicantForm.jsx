@@ -1,10 +1,10 @@
 import {React} from 'react';
-import {Card, CardContent, Grid, TextField} from "@mui/material";
-
+import {Card, CardContent, Grid, Input, TextField} from "@mui/material";
+import FileUpload from "react-mui-fileuploader"
 const ApplicantForm = (props) => {
     const {firstName, setFirstName, lastName, setLastName, age, setAge,
         email, setEmail, city, setCity, address, setAddress, phone, setPhone, jobTitle,
-        setJobTitle, salaryExpectation, setSalaryExpectation, country, setCountry }=props;
+        setJobTitle, salaryExpectation, setSalaryExpectation, country, setCountry, setFile}=props;
 
     return (
         <div>
@@ -109,6 +109,27 @@ const ApplicantForm = (props) => {
                                             type="number"
                                             label="Salary Expectation"
                                             variant="outlined"/>
+                                    </Grid>
+                                    <Grid item  md={6}  alignItems='center'justifyContent='center' textAlign='center' mt={2}>
+                                        <FileUpload
+                                            onChange={(e) => setFile(e.target.files[0])}
+                                            type="file"
+                                            multiFile={false}
+                                            disabled={false}
+                                            title="Upload CV"
+                                            header="Drag to drop"
+                                            leftLabel="or"
+                                            rightLabel="to select files"
+                                            buttonLabel="click here"
+                                            buttonRemoveLabel="Remove all"
+                                            maxFileSize={10}
+                                            maxUploadFiles={0}
+                                            maxFilesContainerHeight={357}
+                                            errorSizeMessage={'fill it or move it to use the default error message'}
+                                            allowedExtensions={['pdf']}
+                                            bannerProps={{ elevation: 0, variant: "outlined" }}
+                                            containerProps={{ elevation: 0, variant: "outlined" }}
+                                        />
                                     </Grid>
                                 </Grid>
                             </form>
