@@ -14,7 +14,8 @@ const Main = () => {
     const navigate = useNavigate();
     const  {data, loading, error} = useQuery(getAllQuery,{variables:{
             take,
-            page
+            page,
+            search
         }});
 
     let applicants = {};
@@ -47,7 +48,7 @@ const Main = () => {
                         <Button variant='contained' color="primary" onClick={handleClick}>Add New Applicant</Button>
                     </Grid>
                 </Grid>
-                {loading===false && error===undefined?<ApplicantList applicants={applicants} search={search}/>:<div>Loading...</div>}
+                {loading===false && error===undefined?<ApplicantList applicants={applicants}/>:<div>Loading...</div>}
 
                 <Box
                     display="flex"

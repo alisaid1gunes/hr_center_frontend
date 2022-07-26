@@ -8,9 +8,7 @@ const ApplicantList = (props) => {
     const {applicants,search} = props;
     const applicantList = JSON.parse(applicants);
     console.log(applicantList);
-    const filteredApplicants = applicantList.filter(applicant => {
-        return applicant.firstName.toLowerCase().includes(search.toLowerCase());
-    })
+
     const cardStyle = {
         width: '35vw',
     }
@@ -20,7 +18,7 @@ const ApplicantList = (props) => {
     }
     return (
         <div>
-            {filteredApplicants.map((applicant) => {
+            {applicantList.map((applicant) => {
                 return (
                     <Grid container justifyContent="center" alignItems="center" key={applicant.id} >
                         <Grid item md={4} >
