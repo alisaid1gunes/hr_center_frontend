@@ -1,8 +1,8 @@
 import {gql} from "@apollo/client";
 
 const GET_All = gql`
-    query Users {
-        users {
+    query Users($take: Float!, $page: Float!) {
+        users(take: $take, page: $page) {
             firstName
             lastName
             id
@@ -14,7 +14,10 @@ const GET_All = gql`
             country
             jobTitle
             salaryExpectation
+            cv
         }
+            usersCount
     }
+    
 `;
 export default GET_All;

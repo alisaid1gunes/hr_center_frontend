@@ -1,0 +1,7 @@
+.file-uploader {
+    width: 350px;
+    box-sizing: border-box;
+    height: 150px !important;
+    border: 1px dashed #00b9f5 !important;
+    background-color: rgba(0, 185, 245, 0.05);
+}
