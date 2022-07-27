@@ -1,26 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {ApolloClient, InMemoryCache, ApolloProvider, ApolloLink} from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client'
-import {BrowserRouter} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  ApolloLink,
+} from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
+import { BrowserRouter } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
+import { SearchContext } from "./context/SearchContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const uploadLink = createUploadLink({ uri: 'http://localhost:4000/graphql' });
+const uploadLink = createUploadLink({ uri: "http://localhost:4000/graphql" });
 const client = new ApolloClient({
-    link: ApolloLink.from([ uploadLink ]),
-    cache: new InMemoryCache(),
+  link: ApolloLink.from([uploadLink]),
+  cache: new InMemoryCache(),
 });
 root.render(
   <React.StrictMode>
-      <BrowserRouter>
+    <BrowserRouter>
       <ApolloProvider client={client}>
-          <App />
+        <App />
       </ApolloProvider>
-      </BrowserRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

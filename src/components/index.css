@@ -5,3 +5,14 @@
     border: 1px dashed #00b9f5 !important;
     background-color: rgba(0, 185, 245, 0.05);
 }
+.main-container {
+    width: calc(100% - 240px);
+    height: 100%;
+    margin-left: 240px;
+}
+@media only screen and (max-width: 768px) {
+   .main-container {
+        width: 100%;
+        margin-left: 0;
+    }
+}
