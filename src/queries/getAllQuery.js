@@ -1,23 +1,23 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 const GET_All = gql`
-    query Users($take: Float!, $page: Float!, $search: String!) {
-        users(take: $take, page: $page, search: $search) {
-            firstName
-            lastName
-            id
-            age
-            phone
-            email
-            address
-            city
-            country
-            jobTitle
-            salaryExpectation
-            cv
-        }
-            usersCount
+  query Users($take: Float!, $page: Float!, $search: String!) {
+    users(take: $take, page: $page, search: $search) {
+      firstName
+      lastName
+      id
+      age
+      phone
+      email
+      address
+      city
+      country
+      jobTitle
+      salaryExpectation
+      cv
+      createdAt
     }
-    
+    usersCount
+  }
 `;
 export default GET_All;

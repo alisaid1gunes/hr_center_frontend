@@ -17,6 +17,7 @@ import { useMutation } from "@apollo/client";
 import getAllQuery from "../queries/getAllQuery";
 import { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
+import "../components/index.css";
 const Detail = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -46,10 +47,14 @@ const Detail = () => {
   };
 
   return (
-    <div>
+    <div className="detail-container">
       <Grid container direction="row" justifyContent="center" mt={5}>
         <Grid item md={4}>
-          <Card>
+          <Card
+            style={{
+              borderRadius: "18px",
+            }}
+          >
             <CardContent>
               <Typography
                 gutterBottom

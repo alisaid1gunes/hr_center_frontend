@@ -35,9 +35,11 @@ const ApplicantForm = (props) => {
   return (
     <div>
       <Grid container justifyContent="center">
-        <Grid item md={6} mt={5}>
+        <Grid item md={6} mt={2}>
           <Card
             style={{
+              padding: "1rem",
+              borderRadius: "18px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

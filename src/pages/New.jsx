@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
 import { SearchContext } from "../context/SearchContext";
+import "../components/index.css";
 
 const New = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const New = () => {
   };
 
   return (
-    <div>
+    <div className="new-container">
       <Grid container md={12} direction="row" justifyContent="center" mt={5}>
         <Grid item md={6} textAlign="center">
           <h1>Add New Applicant</h1>

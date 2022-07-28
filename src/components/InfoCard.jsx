@@ -1,15 +1,20 @@
 import React from "react";
-import { Card, CardContent } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { config, Spring, useSpring } from "react-spring";
 import CountUp from "react-countup";
+
 const cardStyle = {
-  width: "19vw",
   borderRadius: "8px",
 };
 const InfoCard = (props) => {
   const { header, value } = props;
-
   console.log({ header, value });
   return (
     <Card style={cardStyle}>
