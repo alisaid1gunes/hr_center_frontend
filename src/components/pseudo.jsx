@@ -12,7 +12,6 @@ import "./index.css";
 import { FileUploader } from "react-drag-drop-files";
 import getAllCountries from "../services/getAllCountries";
 import getCities from "../services/getCities";
-import Box from "@mui/material/Box";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -36,8 +35,6 @@ const ApplicantForm = (props) => {
     country,
     setCountry,
     setFile,
-    gender,
-    setGender,
   } = props;
 
   const [countryList, setCountryList] = useState([]);
@@ -71,7 +68,7 @@ const ApplicantForm = (props) => {
   return (
     <div>
       <Grid container justifyContent="center" direction="row">
-        <Grid item md={6} mt={10}>
+        <Grid item md={6} mt={2}>
           <Card
             style={{
               borderRadius: "18px",
@@ -81,11 +78,6 @@ const ApplicantForm = (props) => {
             }}
           >
             <CardContent>
-              <Grid container md={12} direction="row" justifyContent="center">
-                <Grid item md={6} textAlign="center">
-                  <h1>Add New Applicant</h1>
-                </Grid>
-              </Grid>
               <form>
                 <Grid
                   container
@@ -108,17 +100,11 @@ const ApplicantForm = (props) => {
                   >
                     <TextField
                       value={firstName}
-                      sx={{
-                        width: "75%",
-                      }}
                       onChange={(e) => setFirstName(e.target.value)}
                       margin={"dense"}
                       type="text"
                       label="Firstname"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
                   </Grid>
                   <Grid
@@ -139,9 +125,6 @@ const ApplicantForm = (props) => {
                       type="text"
                       label="Lastname"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
                   </Grid>
                   <Grid
@@ -162,36 +145,7 @@ const ApplicantForm = (props) => {
                       type="number"
                       label="Age"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
-                  </Grid>
-
-                  <Grid
-                    item
-                    lg={12}
-                    xl={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    alignItems="center"
-                    justifyContent="center"
-                    textAlign="center"
-                  >
-                    <TextField
-                      select
-                      margin={"dense"}
-                      value={gender}
-                      onChange={(e) => setGender(e.target.value)}
-                      sx={{
-                        width: "75%",
-                      }}
-                      label="Gender"
-                    >
-                      <MenuItem value="Male">Male</MenuItem>
-                      <MenuItem value="Female">Female</MenuItem>
-                    </TextField>
                   </Grid>
                   <Grid
                     item
@@ -211,9 +165,6 @@ const ApplicantForm = (props) => {
                       type="text"
                       label="Email"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
                   </Grid>
                   <Grid
@@ -226,9 +177,6 @@ const ApplicantForm = (props) => {
                     alignItems="center"
                     justifyContent="center"
                     textAlign="center"
-                    sx={{
-                      width: "75%",
-                    }}
                   >
                     <TextField
                       value={phone}
@@ -237,12 +185,8 @@ const ApplicantForm = (props) => {
                       type="text"
                       label="Phone"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
                   </Grid>
-
                   <Grid
                     item
                     lg={12}
@@ -253,46 +197,16 @@ const ApplicantForm = (props) => {
                     alignItems="center"
                     justifyContent="center"
                     textAlign="center"
-                    sx={{
-                      width: "75%",
-                    }}
                   >
                     <TextField
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                       margin={"dense"}
                       type="text"
-                      label="Job Title"
+                      label="Address"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
                     />
                   </Grid>
-                  <Grid
-                    item
-                    lg={12}
-                    xl={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    alignItems="center"
-                    justifyContent="center"
-                    textAlign="center"
-                  >
-                    <TextField
-                      value={salaryExpectation}
-                      onChange={(e) => setSalaryExpectation(e.target.value)}
-                      margin={"dense"}
-                      type="number"
-                      label="Salary Expectation"
-                      variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
-                    />
-                  </Grid>
-
                   <Grid
                     item
                     lg={12}
@@ -306,13 +220,39 @@ const ApplicantForm = (props) => {
                   >
                     <TextField
                       select
+                      size="large"
+                      value={city}
+                      sx={{ minWidth: 220, maxWidth: 220 }}
+                      margin={"dense"}
+                      onChange={(e) => setCity(e.target.value)}
+                      label="City"
+                    >
+                      {cityList.map((city) => (
+                        <MenuItem key={city.id} value={city.name}>
+                          {city.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    xl={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    alignItems="center"
+                    justifyContent="center"
+                    textAlign="center"
+                  >
+                    <TextField
+                      select
+                      size="large"
+                      sx={{ minWidth: 220, maxWidth: 220 }}
                       margin={"dense"}
                       value={country}
                       onChange={(e) => {
                         handleCountryChange(e);
-                      }}
-                      sx={{
-                        width: "75%",
                       }}
                       label="Country"
                       margin={"dense"}
@@ -336,21 +276,13 @@ const ApplicantForm = (props) => {
                     textAlign="center"
                   >
                     <TextField
-                      select
-                      value={city}
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
                       margin={"dense"}
-                      onChange={(e) => setCity(e.target.value)}
-                      label="City"
-                      sx={{
-                        width: "75%",
-                      }}
-                    >
-                      {cityList.map((city) => (
-                        <MenuItem key={city.id} value={city.name}>
-                          {city.name}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                      type="text"
+                      label="Job Title"
+                      variant="outlined"
+                    />
                   </Grid>
                   <Grid
                     item
@@ -364,35 +296,37 @@ const ApplicantForm = (props) => {
                     textAlign="center"
                   >
                     <TextField
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
+                      value={salaryExpectation}
+                      onChange={(e) => setSalaryExpectation(e.target.value)}
                       margin={"dense"}
-                      multiline={true}
-                      rows={4}
-                      type="text"
-                      label="Address"
+                      type="number"
+                      label="Salary Expectation"
                       variant="outlined"
-                      sx={{
-                        width: "75%",
-                      }}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    xl={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    xs={12}
+                    alignItems="center"
+                    justifyContent="center"
+                    textAlign="center"
+                    mt={2}
+                  >
+                    <FileUploader
+                      classes="file-uploader"
+                      style={{ height: "500px !important;" }}
+                      multiple={false}
+                      handleChange={handleChange}
+                      name="file"
+                      types={["pdf"]}
                     />
                   </Grid>
                 </Grid>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  textAlign="center"
-                  mt={2}
-                >
-                  <FileUploader
-                    classes="file-uploader"
-                    multiple={false}
-                    handleChange={handleChange}
-                    name="file"
-                    types={["pdf"]}
-                  />
-                </Box>
               </form>
             </CardContent>
           </Card>

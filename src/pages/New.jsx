@@ -1,8 +1,7 @@
-import { React, useContext, useState } from "react";
-import AppBarNormal from "../components/AppBarNormal";
+import { React, useContext, useEffect, useState } from "react";
 import ApplicantForm from "../components/ApplicantForm";
-import { Alert, Button, Grid, Snackbar } from "@mui/material";
-import { useMutation } from "@apollo/client";
+import { Button, Grid } from "@mui/material";
+import { from, useMutation } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
@@ -26,6 +25,7 @@ const New = () => {
   const [salaryExpectation, setSalaryExpectation] = useState();
   const [jobTitle, setJobTitle] = useState("");
   const [file, setFile] = useState("");
+  const [gender, setGender] = useState("");
 
   const [createApplicant, { data, loading, error }] =
     useMutation(CREATE_APPLLICANT);
@@ -45,6 +45,7 @@ const New = () => {
           country,
           salaryExpectation: parseInt(salaryExpectation),
           jobTitle,
+          gender,
         },
         file,
       },
@@ -70,12 +71,6 @@ const New = () => {
 
   return (
     <div className="new-container">
-      <Grid container md={12} direction="row" justifyContent="center" mt={5}>
-        <Grid item md={6} textAlign="center">
-          <h1>Add New Applicant</h1>
-        </Grid>
-      </Grid>
-
       <ApplicantForm
         firstName={firstName}
         setFirstName={setFirstName}
@@ -99,12 +94,14 @@ const New = () => {
         setJobTitle={setJobTitle}
         file={file}
         setFile={setFile}
+        gender={gender}
+        setGender={setGender}
       />
       <Grid container md={12} direction="row" justifyContent="center" mt={5}>
         <Grid item md={6} textAlign="center">
           <Button
             variant={"contained"}
-            color={"primary"}
+            style={{ backgroundColor: "#5a5278" }}
             size="large"
             onClick={onClick}
           >
