@@ -29,13 +29,13 @@
     }
 }
 
-.new-container {
+.detail-container {
     width: calc(100% - 240px);
     height: 100%;
     margin-left: 240px;
 }
 @media only screen and (max-width: 768px) {
-    .new-container {
+    .detail-container {
         width: 100%;
         margin-left: 0;
     }

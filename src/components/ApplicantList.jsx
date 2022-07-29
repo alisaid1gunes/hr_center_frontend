@@ -1,27 +1,16 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Alert,
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Grid,
-  Snackbar,
-} from "@mui/material";
+import { Box, Card, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
-import {
-  Delete,
-  DeleteRounded,
-  Visibility,
-  VisibilityRounded,
-} from "@mui/icons-material";
+import { DeleteRounded, VisibilityRounded } from "@mui/icons-material";
 import { useMutation } from "@apollo/client";
 import DELETE_APPLICANT from "../mutations/deleteApplicant";
 import getAllQuery from "../queries/getAllQuery";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 const ODD_OPACITY = 0.2;
 
@@ -59,7 +48,15 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
 }));
 
 const ApplicantList = (props) => {
-  const [open, setOpen] = useState(false);
+  const context = useContext(AppContext);
+  const {
+    search,
+    setSearch,
+    open,
+    setOpen,
+    snackbarMessage,
+    setSnackbarMessage,
+  } = context;
   const navigate = useNavigate();
   const { applicants, page, setPage, take, count } = props;
   console.log({ applicants, page, setPage, take });
@@ -67,14 +64,26 @@ const ApplicantList = (props) => {
 
   const [deleteApplicant, { data, loading, error }] =
     useMutation(DELETE_APPLICANT);
+
   console.log({ data, loading, error });
   const removeApplicant = (id) => {
     deleteApplicant({
       variables: {
         id,
       },
-      refetchQueries: [{ query: getAllQuery }, "users"],
+      refetchQueries: [
+        {
+          query: getAllQuery,
+          variables: {
+            take,
+            page,
+            search,
+          },
+        },
+        "users",
+      ],
     });
+    setSnackbarMessage("Applicant deleted");
     setOpen(true);
   };
 
@@ -87,29 +96,20 @@ const ApplicantList = (props) => {
       age: applicant.age,
       jobTitle: applicant.jobTitle,
       createdAt: date.toLocaleString("en-US", {
-        weekday: "short", // long, short, narrow
-        day: "numeric", // numeric, 2-digit
-        year: "numeric", // numeric, 2-digit
-        month: "long", // numeric, 2-digit, long, short, narrow
-        hour: "numeric", // numeric, 2-digit
-        minute: "numeric", // numeric, 2-digit
-        second: "numeric", // numeric, 2-digit
+        weekday: "short",
+        day: "numeric",
+        year: "numeric",
+        month: "long",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
       }),
     };
   });
 
   const handleViewClick = (id) => {
     const applicant = applicantList.find((applicant) => applicant.id === id);
-    navigate("detail", { state: { applicant } });
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-    navigate("/");
+    navigate("detail", { state: { applicant, take, page, search } });
   };
 
   const columns = [
@@ -199,21 +199,6 @@ const ApplicantList = (props) => {
               setPage(newPage);
             }}
           />
-          <Snackbar
-            mt={2}
-            open={open}
-            autoHideDuration={2000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          >
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              sx={{ width: "100%", margin: "%10" }}
-            >
-              Applicant deleted successfully
-            </Alert>
-          </Snackbar>
         </Card>
       </Grid>
     </Grid>

@@ -18,6 +18,9 @@ const GET_All = gql`
       createdAt
     }
     usersCount
+    usersMaleCount
+    usersFemaleCount
+    usersAvgAge
   }
 `;
 export default GET_All;

@@ -16,13 +16,14 @@ import DELETE_APPLICANT from "../mutations/deleteApplicant";
 import { useMutation } from "@apollo/client";
 import getAllQuery from "../queries/getAllQuery";
 import { useContext } from "react";
-import { SearchContext } from "../context/SearchContext";
+import { AppContext } from "../context/AppContext";
 import "../components/index.css";
 const Detail = () => {
-  const [open, setOpen] = useState(false);
+  const context = useContext(AppContext);
+  const { setSnackbarMessage, setOpen } = context;
   const location = useLocation();
   const navigate = useNavigate();
-  const { applicant } = location.state;
+  const { applicant, take, page, search } = location.state;
   console.log(applicant);
   const [deleteApplicant, { data, loading, error }] =
     useMutation(DELETE_APPLICANT);
@@ -32,18 +33,21 @@ const Detail = () => {
       variables: {
         id: applicant.id,
       },
-      refetchQueries: [{ query: getAllQuery }, "users"],
+      refetchQueries: [
+        {
+          query: getAllQuery,
+          variables: {
+            take,
+            page,
+            search,
+          },
+        },
+        "users",
+      ],
     });
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
+    setSnackbarMessage("Applicant deleted successfully");
     navigate("/");
+    setOpen(true);
   };
 
   return (
@@ -95,21 +99,6 @@ const Detail = () => {
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        mt={2}
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity="success"
-          sx={{ width: "100%", margin: "%10" }}
-        >
-          Applicant deleted successfully
-        </Alert>
-      </Snackbar>
     </div>
   );
 };

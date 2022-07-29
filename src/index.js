@@ -12,7 +12,7 @@ import {
 import { createUploadLink } from "apollo-upload-client";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
-import { SearchContext } from "./context/SearchContext";
+import { SearchContext } from "./context/AppContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import DrawerMenu from "./components/DrawerMenu";
-import { Context, SearchContext } from "./context/SearchContext";
+import { Context, AppContext } from "./context/AppContext";
 
 function App() {
   const theme = createMuiTheme({

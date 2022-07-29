@@ -3,15 +3,18 @@ import AppBarNormal from "../components/AppBarNormal";
 import ApplicantForm from "../components/ApplicantForm";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
 import { useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
-import { SearchContext } from "../context/SearchContext";
+import { AppContext, SearchContext } from "../context/AppContext";
 import "../components/index.css";
 
 const New = () => {
+  const context = useContext(AppContext);
+  const { setSnackbarMessage, setOpen } = context;
+  const location = useLocation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const { take, page, search } = location.state;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState();
@@ -45,20 +48,24 @@ const New = () => {
         },
         file,
       },
-      refetchQueries: [{ query: getAllQuery }, "users"],
+      refetchQueries: [
+        {
+          query: getAllQuery,
+          variables: {
+            take,
+            page,
+            search,
+          },
+        },
+        "users",
+      ],
     });
   };
   const onClick = () => {
     addApplicant();
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
+    setSnackbarMessage("Applicant added successfully");
     navigate("/");
+    setOpen(true);
   };
 
   return (
@@ -105,21 +112,6 @@ const New = () => {
           </Button>
         </Grid>
       </Grid>
-      <Snackbar
-        mt={2}
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity="success"
-          sx={{ width: "100%", margin: "%10" }}
-        >
-          Applicant created successfully
-        </Alert>
-      </Snackbar>
     </div>
   );
 };

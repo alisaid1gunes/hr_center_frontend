@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { useContext } from "react";
-import { SearchContext } from "../context/SearchContext";
+import { AppContext } from "../context/AppContext";
 import { grey } from "@mui/material/colors";
 import { Avatar } from "@mui/material";
 import logo from "./logo.png";
@@ -72,8 +72,8 @@ function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const searchAPI = useContext(SearchContext);
-  const { search, setSearch } = searchAPI;
+  const context = useContext(AppContext);
+  const { search, setSearch } = context;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
