@@ -16,6 +16,7 @@ const GET_All = gql`
       salaryExpectation
       cv
       createdAt
+      gender
     }
     usersCount
     usersMaleCount

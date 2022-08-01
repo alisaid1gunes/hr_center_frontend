@@ -1,5 +1,4 @@
 import Main from "./pages/Main";
-import Detail from "./pages/Detail";
 import New from "./pages/New";
 import { Route, Routes } from "react-router-dom";
 import {
@@ -9,7 +8,8 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import DrawerMenu from "./components/DrawerMenu";
-import { Context, AppContext } from "./context/AppContext";
+import { Context } from "./context/AppContext";
+import ApplicantDetails from "./components/ApplicantDetails";
 
 function App() {
   const theme = createMuiTheme({
@@ -35,7 +35,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="new" element={<New />} />
-              <Route path="detail" element={<Detail />} />
+              <Route path="detail" element={<ApplicantDetails />} />
             </Routes>
           </ThemeProvider>
         </Container>

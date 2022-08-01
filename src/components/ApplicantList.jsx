@@ -1,7 +1,6 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Card, Grid } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { DataGrid, gridClasses } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
@@ -49,14 +48,7 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
 
 const ApplicantList = (props) => {
   const context = useContext(AppContext);
-  const {
-    search,
-    setSearch,
-    open,
-    setOpen,
-    snackbarMessage,
-    setSnackbarMessage,
-  } = context;
+  const { search, setOpen, setSnackbarMessage } = context;
   const navigate = useNavigate();
   const { applicants, page, setPage, take, count } = props;
   console.log({ applicants, page, setPage, take });

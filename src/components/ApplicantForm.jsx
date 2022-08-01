@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import "./index.css";
 import { FileUploader } from "react-drag-drop-files";
@@ -82,8 +83,8 @@ const ApplicantForm = (props) => {
           >
             <CardContent>
               <Grid container md={12} direction="row" justifyContent="center">
-                <Grid item md={6} textAlign="center">
-                  <h1>Add New Applicant</h1>
+                <Grid item md={6} textAlign="center" mt={2} mb={2}>
+                  <Typography variant={"h2"}>Add New</Typography>
                 </Grid>
               </Grid>
               <form>
@@ -377,22 +378,37 @@ const ApplicantForm = (props) => {
                       }}
                     />
                   </Grid>
+                  <Grid
+                    item
+                    lg={12}
+                    xl={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    alignItems="center"
+                    justifyContent="center"
+                    textAlign="center"
+                  >
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      textAlign="center"
+                      sx={{
+                        width: "100%",
+                      }}
+                    >
+                      <FileUploader
+                        classes="file-uploader"
+                        multiple={false}
+                        handleChange={handleChange}
+                        name="file"
+                        types={["pdf"]}
+                      />
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  textAlign="center"
-                  mt={2}
-                >
-                  <FileUploader
-                    classes="file-uploader"
-                    multiple={false}
-                    handleChange={handleChange}
-                    name="file"
-                    types={["pdf"]}
-                  />
-                </Box>
               </form>
             </CardContent>
           </Card>

@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  makeStyles,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { config, Spring, useSpring } from "react-spring";
 import CountUp from "react-countup";
 
 const cardStyle = {

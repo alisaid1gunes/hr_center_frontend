@@ -1,15 +1,6 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import AppBarNormal from "../components/AppBarNormal";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Snackbar,
-} from "@mui/material";
+import { Alert, Button, Card, CardContent, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ApplicantDetails from "../components/ApplicantDetails";
 import DELETE_APPLICANT from "../mutations/deleteApplicant";
@@ -52,8 +43,8 @@ const Detail = () => {
 
   return (
     <div className="detail-container">
-      <Grid container direction="row" justifyContent="center" mt={5}>
-        <Grid item md={4}>
+      <Grid container direction="row" justifyContent="center" mt={7}>
+        <Grid item md={6}>
           <Card
             style={{
               borderRadius: "18px",
@@ -94,7 +85,11 @@ const Detail = () => {
       </Grid>
       <Grid container direction="row" justifyContent="center" mt={5}>
         <Grid item md={4} textAlign="center">
-          <Button variant="contained" color="error" onClick={removeApplicant}>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#5a5278" }}
+            onClick={removeApplicant}
+          >
             Delete
           </Button>
         </Grid>

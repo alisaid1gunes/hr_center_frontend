@@ -11,14 +11,7 @@ import InfoCard from "../components/InfoCard";
 import "../components/index.css";
 const Main = () => {
   const context = useContext(AppContext);
-  const {
-    search,
-    setSearch,
-    open,
-    setOpen,
-    snackbarMessage,
-    setSnackbarMesssage,
-  } = context;
+  const { search, open, setOpen, snackbarMessage } = context;
   console.log(search);
   const [page, setPage] = useState(0);
   const [take, setTake] = useState(5);
@@ -44,9 +37,11 @@ const Main = () => {
     femaleCount = parseInt(data.usersFemaleCount);
     usersAvgAge = parseInt(data.usersAvgAge);
   }
+
   const handleClick = () => {
     navigate("new", { state: { take, page, search } });
   };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

@@ -23,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.7",
     "react-dropzone": "^14.2.2",
+    "react-masonry-css": "^1.0.16",
     "react-material-file-upload": "^0.0.4",
     "react-mui-fileuploader": "^0.2.0",
     "react-router-dom": "^6.3.0",
