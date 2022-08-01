@@ -2,7 +2,7 @@ import { React, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
-import ApplicantList from "../components/ApplicantList";
+import ApplicantList from "../components/ApplicantList/ApplicantList";
 import getAllQuery from "../queries/getAllQuery";
 import Box from "@mui/material/Box";
 import { AppContext } from "../context/AppContext";
