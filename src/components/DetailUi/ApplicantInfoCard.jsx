@@ -29,7 +29,7 @@ const ApplicantInfoCard = (props) => {
             </Grid>
 
             <Grid container>
-              <Grid item xs={12} xs={12} sm={12} md={6} lg={6}>
+              <Grid item xs={12} xs={12} sm={12} md={6} lg={6} mb={2}>
                 <Box display="flex " flexDirection="column">
                   <Typography variant="body2">First name</Typography>
                   <Typography variant="h5">{applicant.firstName}</Typography>

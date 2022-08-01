@@ -29,13 +29,13 @@ const JobInfoCard = (props) => {
             </Grid>
 
             <Grid container>
-              <Grid item xs={12} xs={12} sm={12} md={12} lg={12}>
+              <Grid item xs={12} xs={12} sm={12} md={12} lg={12} mb={2}>
                 <Box display="flex " flexDirection="column">
                   <Typography variant="body2">JobTitle</Typography>
                   <Typography variant="h5">{applicant.jobTitle}</Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Grid item xs={12} sm={12} md={12} lg={12} mb={2}>
                 <Box display="flex " flexDirection="column">
                   <Typography variant="body2">Salary Expectation</Typography>
                   <Typography variant="h5">
@@ -43,7 +43,7 @@ const JobInfoCard = (props) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item xs={2} sm={2} md={2} lg={2} ML>
+              <Grid item xs={2} sm={2} md={2} lg={2}>
                 <Box display="flex " flexDirection="column">
                   <Typography variant="body2">Cv</Typography>
 
