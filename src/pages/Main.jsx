@@ -64,6 +64,7 @@ const Main = () => {
         setPage={setPage}
         take={take}
         setTake={setTake}
+        snackbarMessage={snackbarMessage}
       />
     </div>
   );

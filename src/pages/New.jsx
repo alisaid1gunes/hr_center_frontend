@@ -1,12 +1,11 @@
 import { React, useContext, useEffect, useState } from "react";
-import { Button, Grid } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
 import { AppContext, SearchContext } from "../context/AppContext";
 import "../components/index.css";
-import ApplicantFormCard from "../components/ApplicantFormCard/ApplicantFormCard";
+import NewUi from "../components/NewUi/NewUi";
 
 const New = () => {
   const context = useContext(AppContext);
@@ -62,7 +61,7 @@ const New = () => {
       ],
     });
   };
-  const onClick = () => {
+  const save = () => {
     addApplicant();
     setSnackbarMessage("Applicant added successfully");
     navigate("/");
@@ -71,7 +70,7 @@ const New = () => {
 
   return (
     <div className="new-container">
-      <ApplicantFormCard
+      <NewUi
         firstName={firstName}
         setFirstName={setFirstName}
         lastName={lastName}
@@ -96,19 +95,8 @@ const New = () => {
         setFile={setFile}
         gender={gender}
         setGender={setGender}
+        save={save}
       />
-      <Grid container md={12} direction="row" justifyContent="center" mt={5}>
-        <Grid item md={6} textAlign="center">
-          <Button
-            variant={"contained"}
-            style={{ backgroundColor: "#5a5278" }}
-            size="large"
-            onClick={onClick}
-          >
-            Save
-          </Button>
-        </Grid>
-      </Grid>
     </div>
   );
 };

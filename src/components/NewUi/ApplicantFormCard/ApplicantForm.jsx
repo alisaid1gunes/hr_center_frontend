@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import "../index.css";
-import getAllCountries from "../../services/getAllCountries";
-import getCities from "../../services/getCities";
+import "../../index.css";
+import getAllCountries from "../../../services/getAllCountries";
+import getCities from "../../../services/getCities";
 import FileUploaderDrag from "./FileUploaderDrag";
 import TextfieldItem from "./TexfieldItem";
 const ApplicantForm = (props) => {

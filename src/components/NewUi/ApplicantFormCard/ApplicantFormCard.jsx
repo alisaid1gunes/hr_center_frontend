@@ -1,6 +1,6 @@
 import { React } from "react";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import "../index.css";
+import "../../index.css";
 
 import ApplicantForm from "./ApplicantForm";
 const ApplicantFormCard = (props) => {
