@@ -1,5 +1,4 @@
 import { React, useContext, useEffect, useState } from "react";
-import ApplicantForm from "../components/ApplicantForm";
 import { Button, Grid } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +6,7 @@ import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
 import { AppContext, SearchContext } from "../context/AppContext";
 import "../components/index.css";
+import ApplicantFormCard from "../components/ApplicantFormCard/ApplicantFormCard";
 
 const New = () => {
   const context = useContext(AppContext);
@@ -71,7 +71,7 @@ const New = () => {
 
   return (
     <div className="new-container">
-      <ApplicantForm
+      <ApplicantFormCard
         firstName={firstName}
         setFirstName={setFirstName}
         lastName={lastName}

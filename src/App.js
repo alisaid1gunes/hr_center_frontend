@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import DrawerMenu from "./components/DrawerMenu/DrawerMenu";
 import { Context } from "./context/AppContext";
-import ApplicantDetails from "./components/ApplicantDetails";
+import Detail from "./pages/Detail";
 
 function App() {
   const theme = createMuiTheme({
@@ -35,7 +35,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="new" element={<New />} />
-              <Route path="detail" element={<ApplicantDetails />} />
+              <Route path="detail" element={<Detail />} />
             </Routes>
           </ThemeProvider>
         </Container>

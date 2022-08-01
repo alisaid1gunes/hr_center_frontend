@@ -1,15 +1,20 @@
-import { React } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Alert, Button, Card, CardContent, Divider, Grid } from "@mui/material";
+import { React, useContext } from "react";
+import { Button, Card, CardContent, Grid, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import ApplicantDetails from "../components/ApplicantDetails";
-import DELETE_APPLICANT from "../mutations/deleteApplicant";
-import { useMutation } from "@apollo/client";
-import getAllQuery from "../queries/getAllQuery";
-import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import "../components/index.css";
-const Detail = () => {
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import DELETE_APPLICANT from "../mutations/deleteApplicant";
+import getAllQuery from "../queries/getAllQuery";
+import {
+  CallOutlined,
+  DownloadOutlined,
+  PersonOutlineRounded,
+  WorkOutlineOutlined,
+} from "@mui/icons-material";
+import Box from "@mui/material/Box";
+
+const Detail = (props) => {
   const context = useContext(AppContext);
   const { setSnackbarMessage, setOpen } = context;
   const location = useLocation();
@@ -43,42 +48,173 @@ const Detail = () => {
 
   return (
     <div className="detail-container">
-      <Grid container direction="row" justifyContent="center" mt={7}>
-        <Grid item md={6}>
+      <Grid container spacing={3} justifyContent="center" mt={7}>
+        <Grid item xs={6} sm={6} md={6}>
           <Card
             style={{
               borderRadius: "18px",
+              overflowWrap: "break-word",
             }}
           >
             <CardContent>
-              <Typography
-                gutterBottom
-                variant="h3"
-                component="div"
-                textAlign="center"
-              >
-                {applicant.firstName} {applicant.lastName}
-              </Typography>
-              <Typography
-                variant="h5"
-                color="text.secondary"
-                textAlign="center"
-              >
-                {applicant.jobTitle}
-              </Typography>
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                textAlign="center"
-                mb={1}
-              >
-                {`${applicant.country}/${applicant.city}`}
-              </Typography>
-              <Divider />
-              <Typography variant="h5" textAlign="center">
-                Detailed Information
-              </Typography>
-              <ApplicantDetails applicant={applicant} />
+              <Grid container>
+                <Grid item xs={12}>
+                  <IconButton
+                    sx={{
+                      fontSize: "35px",
+                    }}
+                  >
+                    <PersonOutlineRounded fontSize="inherit" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+
+              <Grid container>
+                <Grid item xs={12} xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">First name</Typography>
+                    <Typography variant="h5">{applicant.firstName}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Last name</Typography>
+                    <Typography variant="h5">{applicant.lastName}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Age</Typography>
+                    <Typography variant="h5">{applicant.age}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Gender</Typography>
+                    <Typography variant="h5">{applicant.gender}</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} justifyContent="center" mt={1}>
+        <Grid item xs={6} sm={6} md={6}>
+          <Card
+            style={{
+              borderRadius: "18px",
+              overflowWrap: "break-word",
+            }}
+          >
+            <CardContent>
+              <Grid container>
+                <Grid item xs={12}>
+                  <IconButton
+                    sx={{
+                      fontSize: "35px",
+                    }}
+                  >
+                    <CallOutlined fontSize="inherit" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+
+              <Grid container>
+                <Grid item xs={12} xs={12} sm={12} md={12} lg={12}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Email</Typography>
+                    <Typography variant="h5">{applicant.email}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Phone</Typography>
+                    <Typography variant="h5">{applicant.phone}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Country</Typography>
+                    <Typography variant="h5">{applicant.country}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">City</Typography>
+                    <Typography variant="h5">{applicant.city}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} xs={12} sm={12} md={12} lg={12}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Address</Typography>
+                    <Typography variant="h5">{applicant.address}</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} justifyContent="center" mt={1}>
+        <Grid item xs={6} sm={6} md={6}>
+          <Card
+            style={{
+              borderRadius: "18px",
+              overflowWrap: "break-word",
+            }}
+          >
+            <CardContent>
+              <Grid container>
+                <Grid item xs={12}>
+                  <IconButton
+                    sx={{
+                      fontSize: "35px",
+                    }}
+                  >
+                    <WorkOutlineOutlined fontSize="inherit" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+
+              <Grid container>
+                <Grid item xs={12} xs={12} sm={12} md={12} lg={12}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">JobTitle</Typography>
+                    <Typography variant="h5">{applicant.jobTitle}</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Salary Expectation</Typography>
+                    <Typography variant="h5">
+                      {applicant.salaryExpectation} Tl
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={2} sm={2} md={2} lg={2} ML>
+                  <Box display="flex " flexDirection="column">
+                    <Typography variant="body2">Cv</Typography>
+
+                    <Button
+                      style={{
+                        color: "#5a5278",
+                      }}
+                      sx={{
+                        marginLeft: 3,
+                      }}
+                      startIcon={<DownloadOutlined />}
+                      href={
+                        "https://res.cloudinary.com/dzi4g0acr/image/upload/v1658741035/" +
+                        applicant.cv
+                      }
+                      download
+                    >
+                      Download
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
