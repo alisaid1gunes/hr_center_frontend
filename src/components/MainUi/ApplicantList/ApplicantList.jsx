@@ -1,10 +1,10 @@
 import { React } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import DELETE_APPLICANT from "../../mutations/deleteApplicant";
-import getAllQuery from "../../queries/getAllQuery";
+import DELETE_APPLICANT from "../../../mutations/deleteApplicant";
+import getAllQuery from "../../../queries/getAllQuery";
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../../../context/AppContext";
 import DataGridUi from "./DataGridUi";
 const ApplicantList = (props) => {
   const context = useContext(AppContext);

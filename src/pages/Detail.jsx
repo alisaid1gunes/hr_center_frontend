@@ -1,11 +1,10 @@
 import { React, useContext } from "react";
-import { Button, Grid } from "@mui/material";
 import { AppContext } from "../context/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import DELETE_APPLICANT from "../mutations/deleteApplicant";
 import getAllQuery from "../queries/getAllQuery";
-import DetailCards from "../components/DetailCards/DetailCards";
+import DetailUi from "../components/DetailUi/DetailUi";
 
 const Detail = (props) => {
   const context = useContext(AppContext);
@@ -41,19 +40,7 @@ const Detail = (props) => {
 
   return (
     <div className="detail-container">
-      <DetailCards applicant={applicant} />
-
-      <Grid container direction="row" justifyContent="center" mt={5}>
-        <Grid item md={4} textAlign="center">
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "#5a5278" }}
-            onClick={removeApplicant}
-          >
-            Delete
-          </Button>
-        </Grid>
-      </Grid>
+      <DetailUi applicant={applicant} removeApplicant={removeApplicant} />
     </div>
   );
 };
