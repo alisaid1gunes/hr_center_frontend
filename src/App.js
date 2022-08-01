@@ -7,7 +7,7 @@ import {
   CssBaseline,
   ThemeProvider,
 } from "@mui/material";
-import DrawerMenu from "./components/DrawerMenu";
+import DrawerMenu from "./components/DrawerMenu/DrawerMenu";
 import { Context } from "./context/AppContext";
 import ApplicantDetails from "./components/ApplicantDetails";
 
