@@ -8,6 +8,7 @@ const DataGridUi = (props) => {
   const {
     applicantList,
     handleViewClick,
+    handleUpdateClick,
     removeApplicant,
     page,
     setPage,
@@ -33,7 +34,11 @@ const DataGridUi = (props) => {
             key={Math.random()}
             sx={{ border: "none" }}
             rows={rows(applicantList)}
-            columns={columns(handleViewClick, removeApplicant)}
+            columns={columns(
+              handleViewClick,
+              removeApplicant,
+              handleUpdateClick
+            )}
             pagination
             page={page}
             pageSize={take}

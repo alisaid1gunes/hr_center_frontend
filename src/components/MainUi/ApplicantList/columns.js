@@ -1,7 +1,11 @@
 import React from "react";
 import ActionCell from "./ActionCell";
 
-export const columns = (handleViewClick, removeApplicant) => {
+export const columns = (
+  handleViewClick,
+  removeApplicant,
+  handleUpdateClick
+) => {
   return [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -48,6 +52,7 @@ export const columns = (handleViewClick, removeApplicant) => {
           params={params}
           handleViewClick={handleViewClick}
           removeApplicant={removeApplicant}
+          handleUpdateClick={handleUpdateClick}
         />
       ),
     },
