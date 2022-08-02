@@ -28,12 +28,14 @@ const UpdateUi = (props) => {
     setFile,
     gender,
     setGender,
-    save,
+    update,
   } = props;
   return (
     <>
       <Grid container md={12} direction="row" justifyContent="center" mt={5}>
         <ApplicantFormCard
+          mode={"update"}
+          cardTitle={"Update Applicant"}
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}
@@ -58,7 +60,7 @@ const UpdateUi = (props) => {
           setFile={setFile}
           gender={gender}
           setGender={setGender}
-          save={save}
+          update={update}
         />
       </Grid>
     </>

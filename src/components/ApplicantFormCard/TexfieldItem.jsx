@@ -70,7 +70,7 @@ const TextfieldItem = (props) => {
           <Controller
             name={name}
             control={control}
-            render={({ field: { onChange, value } }) => {
+            render={({ field: { onChange } }) => {
               return (
                 <TextField
                   value={value}
@@ -98,7 +98,7 @@ const TextfieldItem = (props) => {
         <Controller
           name={name}
           control={control}
-          render={({ field: { onChange, value } }) => {
+          render={({ field: { onChange } }) => {
             return (
               <TextField
                 select
@@ -106,6 +106,7 @@ const TextfieldItem = (props) => {
                 onChange={(e) => {
                   onChange(e.target.value);
                   setter(e.target.value);
+                  console.log(e.target.value);
                 }}
                 margin={"dense"}
                 type={type}

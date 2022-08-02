@@ -19,7 +19,7 @@ const ApplicantFormCard = (props) => {
             <CardContent>
               <Grid container md={12} direction="row" justifyContent="center">
                 <Grid item md={6} textAlign="center" mt={2} mb={2}>
-                  <Typography variant={"h2"}>Add New</Typography>
+                  <Typography variant={"h2"}>{props.cardTitle}</Typography>
                 </Grid>
               </Grid>
               <ApplicantForm props={props} />

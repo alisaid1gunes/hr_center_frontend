@@ -1,7 +1,6 @@
 import React from "react";
-import ApplicantFormCard from "./ApplicantFormCard/ApplicantFormCard";
+import ApplicantFormCard from "../ApplicantFormCard/ApplicantFormCard";
 import { Grid } from "@mui/material";
-import SaveButton from "./SaveButton";
 
 const NewUi = (props) => {
   const {
@@ -35,6 +34,8 @@ const NewUi = (props) => {
     <>
       <Grid container md={12} direction="row" justifyContent="center" mt={5}>
         <ApplicantFormCard
+          mode={"save"}
+          cardTitle={"Add New"}
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}

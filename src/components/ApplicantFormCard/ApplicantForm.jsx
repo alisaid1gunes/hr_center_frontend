@@ -1,14 +1,15 @@
 import { React, useEffect, useState } from "react";
 import { Button, Grid, TextField } from "@mui/material";
 import "../../index.css";
-import getAllCountries from "../../../services/getAllCountries";
-import getCities from "../../../services/getCities";
+import getAllCountries from "../../services/getAllCountries";
+import getCities from "../../services/getCities";
 import FileUploaderDrag from "./FileUploaderDrag";
 import TextfieldItem from "./TexfieldItem";
 import { useForm, Controller } from "react-hook-form";
-import { validation } from "./validation";
+import { saveValidation } from "./saveValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SaveButton from "../SaveButton";
+import SaveButton from "../NewUi/SaveButton";
+import { updateValidation } from "./updateValidaiton";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -35,6 +36,8 @@ const ApplicantForm = (props) => {
     gender,
     setGender,
     save,
+    update,
+    mode,
   } = props.props;
 
   const [countryList, setCountryList] = useState([]);
@@ -46,8 +49,13 @@ const ApplicantForm = (props) => {
 
   const getCountries = async () => {
     const countries = await getAllCountries();
+    if (mode === "update") {
+      const countryCode = await countries.find(
+        (countryItem) => countryItem.name === country
+      ).iso2;
+      setCityList(await getCities(countryCode));
+    }
     setCountryList(countries);
-    console.log(countries);
   };
 
   const handleChange = (file) => {
@@ -63,18 +71,27 @@ const ApplicantForm = (props) => {
     cities.sort();
     setCityList(cities);
   };
+  const validationChooser = () => {
+    if (mode === "save") {
+      return saveValidation;
+    } else {
+      return updateValidation;
+    }
+  };
   const {
-    register,
     control,
-    getValues,
     formState: { errors },
     handleSubmit,
   } = useForm({
     mode: "onBlur", // "onChange"
-    resolver: yupResolver(validation),
+    resolver: yupResolver(validationChooser()),
   });
-  const onSubmit = (data) => {
-    save();
+  const onSubmit = () => {
+    if (mode === "update") {
+      update();
+    } else {
+      save();
+    }
   };
 
   useEffect(() => {

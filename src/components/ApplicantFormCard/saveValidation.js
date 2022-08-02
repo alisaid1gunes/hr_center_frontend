@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const validation = yup
+export const saveValidation = yup
   .object()
   .shape({
     firstName: yup.string().max(20).required("First name is required"),
