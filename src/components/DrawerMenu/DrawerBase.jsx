@@ -12,11 +12,17 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-
+import { useNavigate } from "react-router-dom";
 const DrawerBase = () => {
+  const navigate = useNavigate();
   return (
     <div>
-      <Toolbar>
+      <Toolbar
+        onClick={() => navigate("/")}
+        style={{
+          cursor: "pointer",
+        }}
+      >
         <Avatar alt="İcon" src={logo} />
         <Typography fontSize={24}>Hr Center</Typography>
       </Toolbar>

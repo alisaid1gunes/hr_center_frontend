@@ -150,6 +150,7 @@ const ApplicantForm = (props) => {
           <TextfieldItem
             type={"text"}
             isSelect={false}
+            isPhone={true}
             value={phone}
             setter={setPhone}
             label={"Phone"}
