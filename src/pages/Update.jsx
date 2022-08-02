@@ -1,6 +1,6 @@
 import React from "react";
 import "../components/index.css";
-import { useContext, useState } from "@types/react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
 const Update = () => {

@@ -54,6 +54,7 @@ const ApplicantList = (props) => {
       handleViewClick={handleViewClick}
       handleUpdateClick={handleUpdateClick}
       removeApplicant={removeApplicant}
+      take={take}
       page={page}
       setPage={setPage}
       count={count}
