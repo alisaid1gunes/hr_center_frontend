@@ -10,6 +10,7 @@ import {
 import DrawerMenu from "./components/DrawerMenu/DrawerMenu";
 import { Context } from "./context/AppContext";
 import Detail from "./pages/Detail";
+import Update from "./pages/Update";
 
 function App() {
   const theme = createMuiTheme({
@@ -36,6 +37,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="new" element={<New />} />
               <Route path="detail" element={<Detail />} />
+              <Route path="detail" element={<Update />} />
             </Routes>
           </ThemeProvider>
         </Container>

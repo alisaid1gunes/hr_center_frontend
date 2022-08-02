@@ -44,10 +44,15 @@ const ApplicantList = (props) => {
     navigate("detail", { state: { applicant, take, page, search } });
   };
 
+  const handleUpdateClick = (id) => {
+    const applicant = applicantList.find((applicant) => applicant.id === id);
+    navigate("update", { state: { applicant, take, page, search } });
+  };
   return (
     <DataGridUi
       applicantList={applicantList}
       handleViewClick={handleViewClick}
+      handleUpdateClick={handleUpdateClick}
       removeApplicant={removeApplicant}
       page={page}
       setPage={setPage}
