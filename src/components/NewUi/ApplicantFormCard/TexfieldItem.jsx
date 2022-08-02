@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, isValidPhoneNumber } from "mui-tel-input";
 
 const TextfieldItem = (props) => {
   const {
@@ -58,8 +58,10 @@ const TextfieldItem = (props) => {
                   sx={{
                     width: "75%",
                   }}
-                  helperText={error?.message}
-                  error={error !== undefined}
+                  helperText={
+                    isValidPhoneNumber(value) ? "" : "Invalid Phone Number"
+                  }
+                  error={isValidPhoneNumber(value) ? false : true}
                 />
               );
             }}
