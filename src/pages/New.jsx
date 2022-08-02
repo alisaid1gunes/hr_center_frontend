@@ -1,12 +1,11 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useLocation, useNavigate } from "react-router-dom";
 import CREATE_APPLLICANT from "../mutations/createApplicant";
 import getAllQuery from "../queries/getAllQuery";
-import { AppContext, SearchContext } from "../context/AppContext";
+import { AppContext } from "../context/AppContext";
 import "../components/index.css";
 import NewUi from "../components/NewUi/NewUi";
-import { validation } from "../components/NewUi/ApplicantFormCard/validation";
 
 const New = () => {
   const context = useContext(AppContext);
