@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Grid } from "@mui/material";
 
-const SaveButton = (props) => {
+const ActionButton = (props) => {
+  const { mode } = props;
+
   return (
     <Grid item md={6} textAlign="center" mt={5} justifyContent="center">
       <Button
@@ -10,10 +12,10 @@ const SaveButton = (props) => {
         size="large"
         type={"submit"}
       >
-        Save
+        {mode === "save" ? "Save" : "Update"}
       </Button>
     </Grid>
   );
 };
 
-export default SaveButton;
+export default ActionButton;

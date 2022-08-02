@@ -1,14 +1,14 @@
 import { React, useEffect, useState } from "react";
-import { Button, Grid, TextField } from "@mui/material";
+import { Grid } from "@mui/material";
 import "../../index.css";
 import getAllCountries from "../../services/getAllCountries";
 import getCities from "../../services/getCities";
 import FileUploaderDrag from "./FileUploaderDrag";
 import TextfieldItem from "./TexfieldItem";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { saveValidation } from "./saveValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SaveButton from "../NewUi/SaveButton";
+import ActionButton from "../NewUi/ActionButton";
 import { updateValidation } from "./updateValidaiton";
 const ApplicantForm = (props) => {
   const {
@@ -247,7 +247,7 @@ const ApplicantForm = (props) => {
           >
             <FileUploaderDrag handleChange={handleChange} />
           </Grid>
-          <SaveButton />
+          <ActionButton mode={mode} />
         </Grid>
       </form>
     </div>
