@@ -1,9 +1,21 @@
 import React from "react";
 import { Grid, MenuItem, TextField } from "@mui/material";
+import { Controller } from "react-hook-form";
 
 const TextfieldItem = (props) => {
-  const { type, isSelect, value, setter, label, selectList, rows, multiline } =
-    props;
+  const {
+    type,
+    isSelect,
+    value,
+    setter,
+    label,
+    selectList,
+    rows,
+    multiline,
+    control,
+    name,
+    error,
+  } = props;
   console.log(props);
 
   return (
@@ -22,36 +34,63 @@ const TextfieldItem = (props) => {
       }}
     >
       {isSelect === false ? (
-        <TextField
-          value={value}
-          onChange={(e) => setter(e.target.value)}
-          margin={"dense"}
-          type={type}
-          label={label}
-          rows={rows}
-          multiline={multiline}
-          variant="outlined"
-          sx={{
-            width: "75%",
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => {
+            return (
+              <TextField
+                value={value}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                  setter(e.target.value);
+                }}
+                margin={"dense"}
+                type={type}
+                label={label}
+                rows={rows}
+                multiline={multiline}
+                variant="outlined"
+                sx={{
+                  width: "75%",
+                }}
+                helperText={error?.message}
+                error={error !== undefined}
+              />
+            );
           }}
         />
       ) : (
-        <TextField
-          select
-          value={value}
-          margin={"dense"}
-          onChange={(e) => setter(e.target.value)}
-          label={label}
-          sx={{
-            width: "75%",
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => {
+            return (
+              <TextField
+                select
+                value={value}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                  setter(e.target.value);
+                }}
+                margin={"dense"}
+                type={type}
+                label={label}
+                sx={{
+                  width: "75%",
+                }}
+                helperText={error?.message}
+                error={error !== undefined}
+              >
+                {selectList.map((item) => (
+                  <MenuItem key={item.id} value={item.name}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            );
           }}
-        >
-          {selectList.map((item) => (
-            <MenuItem key={item.id} value={item.name}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </TextField>
+        />
       )}
     </Grid>
   );

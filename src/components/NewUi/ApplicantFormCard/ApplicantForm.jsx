@@ -1,10 +1,14 @@
 import { React, useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import "../../index.css";
 import getAllCountries from "../../../services/getAllCountries";
 import getCities from "../../../services/getCities";
 import FileUploaderDrag from "./FileUploaderDrag";
 import TextfieldItem from "./TexfieldItem";
+import { useForm, Controller } from "react-hook-form";
+import { validation } from "./validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import SaveButton from "../SaveButton";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -30,6 +34,7 @@ const ApplicantForm = (props) => {
     setFile,
     gender,
     setGender,
+    save,
   } = props.props;
 
   const [countryList, setCountryList] = useState([]);
@@ -58,13 +63,26 @@ const ApplicantForm = (props) => {
     cities.sort();
     setCityList(cities);
   };
+  const {
+    register,
+    control,
+    getValues,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    mode: "onBlur", // "onChange"
+    resolver: yupResolver(validation),
+  });
+  const onSubmit = (data) => {
+    save();
+  };
 
   useEffect(() => {
     getCountries();
   }, []);
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid
           container
           direction="row"
@@ -80,6 +98,9 @@ const ApplicantForm = (props) => {
             setter={setFirstName}
             label={"First Name"}
             multiline={false}
+            control={control}
+            name={"firstName"}
+            error={errors?.firstName}
           />
           <TextfieldItem
             type={"text"}
@@ -88,6 +109,9 @@ const ApplicantForm = (props) => {
             setter={setLastName}
             label={"Last Name"}
             multiline={false}
+            control={control}
+            name={"lastName"}
+            error={errors?.lastName}
           />
           <TextfieldItem
             type={"number"}
@@ -96,8 +120,10 @@ const ApplicantForm = (props) => {
             setter={setAge}
             label={"Age"}
             multiline={false}
+            control={control}
+            name={"age"}
+            error={errors?.age}
           />
-
           <TextfieldItem
             type={"text"}
             isSelect={true}
@@ -106,6 +132,9 @@ const ApplicantForm = (props) => {
             setter={setGender}
             label={"Gender"}
             multiple={false}
+            control={control}
+            name={"gender"}
+            error={errors?.gender}
           />
           <TextfieldItem
             type={"text"}
@@ -114,6 +143,9 @@ const ApplicantForm = (props) => {
             setter={setEmail}
             label={"Email"}
             multiline={false}
+            control={control}
+            name={"email"}
+            error={errors?.email}
           />
           <TextfieldItem
             type={"text"}
@@ -122,8 +154,10 @@ const ApplicantForm = (props) => {
             setter={setPhone}
             label={"Phone"}
             multiline={false}
+            control={control}
+            name={"phone"}
+            error={errors?.phone}
           />
-
           <TextfieldItem
             type={"text"}
             isSelect={false}
@@ -131,6 +165,9 @@ const ApplicantForm = (props) => {
             setter={setJobTitle}
             label={"Job Title"}
             multiline={false}
+            control={control}
+            name={"jobTitle"}
+            error={errors?.jobTitle}
           />
           <TextfieldItem
             type={"number"}
@@ -139,6 +176,9 @@ const ApplicantForm = (props) => {
             setter={setSalaryExpectation}
             label={"Salary Expectation"}
             multiline={false}
+            control={control}
+            name={"salaryExpectation"}
+            error={errors?.salaryExpectation}
           />
           <TextfieldItem
             type={"text"}
@@ -148,6 +188,9 @@ const ApplicantForm = (props) => {
             setter={handleCountryChange}
             label={"Country"}
             multiple={false}
+            control={control}
+            name={"country"}
+            error={errors?.country}
           />
           <TextfieldItem
             type={"text"}
@@ -157,6 +200,9 @@ const ApplicantForm = (props) => {
             setter={setCity}
             label={"City"}
             multiple={false}
+            control={control}
+            name={"city"}
+            error={errors?.city}
           />
           <TextfieldItem
             type={"text"}
@@ -166,6 +212,9 @@ const ApplicantForm = (props) => {
             label={"Address"}
             multiline={true}
             rows={4}
+            control={control}
+            name={"address"}
+            error={errors?.address}
           />
           <Grid
             item
@@ -180,6 +229,7 @@ const ApplicantForm = (props) => {
           >
             <FileUploaderDrag handleChange={handleChange} />
           </Grid>
+          <SaveButton />
         </Grid>
       </form>
     </div>

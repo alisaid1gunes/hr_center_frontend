@@ -59,8 +59,8 @@ const NewUi = (props) => {
           setFile={setFile}
           gender={gender}
           setGender={setGender}
+          save={save}
         />
-        <SaveButton save={save} />
       </Grid>
     </>
   );
