@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, MenuItem, TextField } from "@mui/material";
+import { Autocomplete, Grid, MenuItem, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { MuiTelInput, isValidPhoneNumber } from "mui-tel-input";
 
@@ -80,12 +80,11 @@ const TextfieldItem = (props) => {
                   margin={"dense"}
                   type={type}
                   label={label}
-                  rows={rows}
-                  multiline={multiline}
-                  variant="outlined"
                   sx={{
                     width: "75%",
                   }}
+                  multiline={multiline}
+                  rows={rows}
                   helperText={error?.message}
                   error={error !== undefined}
                 />
@@ -97,31 +96,37 @@ const TextfieldItem = (props) => {
         <Controller
           name={name}
           control={control}
-          render={({ field: { onChange } }) => {
+          render={({ field: { onChange, value } }) => {
             return (
-              <TextField
-                select
+              <Autocomplete
+                disablePortal
+                getOptionLabel={(option) => {
+                  if (option.hasOwnProperty("name")) {
+                    return option.name;
+                  }
+                  return option;
+                }}
+                onChange={(e, item) => {
+                  onChange(item.name);
+                  setter(item.name);
+                  console.log(item.name);
+                }}
+                options={selectList}
                 value={value}
-                onChange={(e) => {
-                  onChange(e.target.value);
-                  setter(e.target.value);
-                  console.log(e.target.value);
-                }}
-                margin={"dense"}
-                type={type}
-                label={label}
-                sx={{
-                  width: "75%",
-                }}
-                helperText={error?.message}
-                error={error !== undefined}
-              >
-                {selectList.map((item) => (
-                  <MenuItem key={item.id} value={item.name}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </TextField>
+                renderInput={(params) => (
+                  <TextField
+                    sx={{
+                      width: "75%",
+                    }}
+                    label={label}
+                    {...params}
+                    margin={"dense"}
+                    type={type}
+                    helperText={error?.message}
+                    error={error !== undefined}
+                  />
+                )}
+              />
             );
           }}
         />

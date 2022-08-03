@@ -59,7 +59,7 @@ const ApplicantForm = (props) => {
         (countryItem) => countryItem.name === country
       ).iso2;
       const cities = await getCities(countryCode);
-      handleCityList(cities);
+      handleCityList(cities, country);
       setCityList(cities);
     }
     setCountryList(countries);
@@ -75,7 +75,7 @@ const ApplicantForm = (props) => {
     ).iso2;
     setCountry(value);
     const cities = await getCities(countryCode);
-    handleCityList(cities);
+    handleCityList(cities, value);
     setCityList(cities);
   };
   const validationChooser = () => {
