@@ -7,11 +7,12 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import DrawerBase from "./DrawerBase";
 import DrawerAppBar from "./DrawerAppBar";
-
+import { useLocation } from "react-router-dom";
 const drawerWidth = 240;
 
 function DrawerMenu(props) {
   const { window } = props;
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const context = useContext(AppContext);
@@ -28,6 +29,7 @@ function DrawerMenu(props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <DrawerAppBar
+        location={location.pathname}
         search={search}
         setSearch={setSearch}
         drawerWidth={drawerWidth}

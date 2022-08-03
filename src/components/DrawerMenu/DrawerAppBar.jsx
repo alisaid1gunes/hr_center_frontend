@@ -10,7 +10,8 @@ import { StyledInputBase } from "./StyledInputBase";
 import AppBar from "@mui/material/AppBar";
 
 const DrawerAppBar = (props) => {
-  const { search, setSearch, drawerWidth, handleDrawerToggle } = props;
+  const { search, setSearch, drawerWidth, handleDrawerToggle, location } =
+    props;
   return (
     <AppBar
       position="fixed"
@@ -35,17 +36,21 @@ const DrawerAppBar = (props) => {
         <Typography variant="h6" noWrap component="div" color="black">
           Applicants
         </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
-          />
-        </Search>
+        {location === "/" ? (
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+            />
+          </Search>
+        ) : (
+          ""
+        )}
       </Toolbar>
     </AppBar>
   );
