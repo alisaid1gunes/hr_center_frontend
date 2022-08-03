@@ -14,13 +14,13 @@ const ActionCell = (props) => {
       <IconButton>
         <VisibilityRounded
           fontWeight={"lighter"}
-          onClick={(e) => handleViewClick(e, params.row.id)}
+          onClick={(e) => handleViewClick(params.row.id)}
         />
       </IconButton>
-      <IconButton onClick={(e) => handleUpdateClick(e, params.row.id)}>
+      <IconButton onClick={(e) => handleUpdateClick(params.row.id)}>
         <EditRounded fontWeight={"lighter"} />
       </IconButton>
-      <IconButton onClick={(e) => removeApplicant(e, params.row.id)}>
+      <IconButton onClick={(e) => removeApplicant(params.row.id)}>
         <DeleteRounded fontWeight={"lighter"} />
       </IconButton>
     </Box>
