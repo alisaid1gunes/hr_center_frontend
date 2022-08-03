@@ -18,7 +18,8 @@ const ApplicantList = (props) => {
     useMutation(DELETE_APPLICANT);
 
   console.log({ data, loading, error });
-  const removeApplicant = (id) => {
+  const removeApplicant = (e, id) => {
+    e.preventDefault();
     deleteApplicant({
       variables: {
         id,
@@ -40,6 +41,7 @@ const ApplicantList = (props) => {
   };
 
   const handleViewClick = (id) => {
+    e.preventDefault();
     const applicant = applicantList.find((applicant) => applicant.id === id);
     navigate("detail", { state: { applicant, take, page, search } });
   };
