@@ -44,7 +44,10 @@ const DrawerAppBar = (props) => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                e.preventDefault();
+                setSearch(e.target.value);
+              }}
               value={search}
             />
           </Search>

@@ -10,6 +10,10 @@ import { saveValidation } from "./saveValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ActionButton from "../NewUi/ActionButton";
 import { updateValidation } from "./updateValidaiton";
+import { changeItemIndex } from "./changeItemIndex";
+import { sortWithName } from "./sortWithName";
+import { handleCityList } from "./handleCityList";
+import { handleCountryList } from "./handleCountryList";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -49,11 +53,14 @@ const ApplicantForm = (props) => {
 
   const getCountries = async () => {
     const countries = await getAllCountries();
+    handleCountryList(countries);
     if (mode === "update") {
       const countryCode = await countries.find(
         (countryItem) => countryItem.name === country
       ).iso2;
-      setCityList(await getCities(countryCode));
+      const cities = await getCities(countryCode);
+      handleCityList(cities);
+      setCityList(cities);
     }
     setCountryList(countries);
   };
@@ -68,7 +75,7 @@ const ApplicantForm = (props) => {
     ).iso2;
     setCountry(value);
     const cities = await getCities(countryCode);
-    cities.sort();
+    handleCityList(cities);
     setCityList(cities);
   };
   const validationChooser = () => {

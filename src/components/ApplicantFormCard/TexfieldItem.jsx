@@ -18,7 +18,6 @@ const TextfieldItem = (props) => {
     isPhone,
     error,
   } = props;
-  console.log(props);
 
   return (
     <Grid
