@@ -3,6 +3,7 @@ import { Card, Grid } from "@mui/material";
 import { StripedDataGrid } from "./StrippedDataGrid";
 import { rows } from "./rows";
 import { columns } from "./columns";
+import CustomGridToolbar from "./CustomGridToolbar";
 
 const DataGridUi = (props) => {
   const {
@@ -31,6 +32,10 @@ const DataGridUi = (props) => {
             getRowClassName={(params) =>
               params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
             }
+            components={{ Toolbar: CustomGridToolbar }}
+            componentsProps={{
+              toolbar: { count },
+            }}
             key={Math.random()}
             sx={{ border: "none" }}
             rows={rows(applicantList)}

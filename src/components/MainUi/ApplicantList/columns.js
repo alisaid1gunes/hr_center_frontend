@@ -47,6 +47,7 @@ export const columns = (
       headerName: "Actions",
       sortable: false,
       width: 150,
+      disableExport: true,
       renderCell: (params) => (
         <ActionCell
           params={params}
