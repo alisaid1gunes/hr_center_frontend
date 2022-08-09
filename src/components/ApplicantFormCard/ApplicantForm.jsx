@@ -13,7 +13,7 @@ import { updateValidation } from "./updateValidaiton";
 import { handleCityList } from "./handleCityList";
 import { handleCountryList } from "./handleCountryList";
 import { useMutation } from "@apollo/client";
-import PARSE_PDF from "../../mutations/parsePdf";
+import PARSE_PDF from "../../mutations/parseCv";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -44,10 +44,10 @@ const ApplicantForm = (props) => {
     mode,
   } = props.props;
 
-  const [parsePdf, { data, loading, error }] = useMutation(PARSE_PDF);
+  const [parseCv, { data, loading, error }] = useMutation(PARSE_PDF);
   console.log({ data, loading, error });
   const parse = (file) => {
-    parsePdf({
+    parseCv({
       variables: {
         file,
       },
@@ -116,12 +116,12 @@ const ApplicantForm = (props) => {
   }, []);
 
   useEffect(() => {
-    setFirstName(data?.parsePdf?.firstName);
-    setLastName(data?.parsePdf?.lastName);
-    setEmail(data?.parsePdf?.email);
-    setAddress(data?.parsePdf?.address);
-    setJobTitle(data?.parsePdf?.jobTitle);
-    setPhone(data?.parsePdf?.phone + "");
+    setFirstName(data?.parseCv?.firstName);
+    setLastName(data?.parseCv?.lastName);
+    setEmail(data?.parseCv?.email);
+    setAddress(data?.parseCv?.address);
+    setJobTitle(data?.parseCv?.jobTitle);
+    setPhone(data?.parseCv?.phone + "");
   }, [data]);
   return (
     <div>

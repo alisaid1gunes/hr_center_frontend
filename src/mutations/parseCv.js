@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-const PARSE_PDF = gql`
-  mutation parsePdf($file: Upload!) {
-    parsePdf(file: $file) {
+const PARSE_CV = gql`
+  mutation parseCv($file: Upload!) {
+    parseCv(file: $file) {
       firstName
       lastName
       email
@@ -12,4 +12,4 @@ const PARSE_PDF = gql`
     }
   }
 `;
-export default PARSE_PDF;
+export default PARSE_CV;
