@@ -10,10 +10,10 @@ import { saveValidation } from "./saveValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ActionButton from "../NewUi/ActionButton";
 import { updateValidation } from "./updateValidaiton";
-import { changeItemIndex } from "./changeItemIndex";
-import { sortWithName } from "./sortWithName";
 import { handleCityList } from "./handleCityList";
 import { handleCountryList } from "./handleCountryList";
+import { useMutation } from "@apollo/client";
+import PARSE_PDF from "../../mutations/parsePdf";
 const ApplicantForm = (props) => {
   const {
     firstName,
@@ -44,6 +44,15 @@ const ApplicantForm = (props) => {
     mode,
   } = props.props;
 
+  const [parsePdf, { data, loading, error }] = useMutation(PARSE_PDF);
+  console.log({ data, loading, error });
+  const parse = (file) => {
+    parsePdf({
+      variables: {
+        file,
+      },
+    });
+  };
   const [countryList, setCountryList] = useState([]);
   const [cityList, setCityList] = useState([]);
   const genderList = [
@@ -67,6 +76,7 @@ const ApplicantForm = (props) => {
 
   const handleChange = (file) => {
     setFile(file);
+    parse(file);
   };
 
   const handleCountryChange = async (value) => {
@@ -90,7 +100,7 @@ const ApplicantForm = (props) => {
     formState: { errors },
     handleSubmit,
   } = useForm({
-    mode: "onBlur", // "onChange"
+    mode: "onBlur",
     resolver: yupResolver(validationChooser()),
   });
   const onSubmit = () => {
@@ -104,6 +114,15 @@ const ApplicantForm = (props) => {
   useEffect(() => {
     getCountries();
   }, []);
+
+  useEffect(() => {
+    setFirstName(data?.parsePdf?.firstName);
+    setLastName(data?.parsePdf?.lastName);
+    setEmail(data?.parsePdf?.email);
+    setAddress(data?.parsePdf?.address);
+    setJobTitle(data?.parsePdf?.jobTitle);
+    setPhone(data?.parsePdf?.phone + "");
+  }, [data]);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>

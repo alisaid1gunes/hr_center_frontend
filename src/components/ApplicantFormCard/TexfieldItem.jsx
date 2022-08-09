@@ -45,6 +45,7 @@ const TextfieldItem = (props) => {
                   defaultCountry="TR"
                   value={value}
                   onChange={(e) => {
+                    console.log(e);
                     onChange(e);
                     setter(e);
                   }}
