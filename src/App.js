@@ -34,7 +34,7 @@ function App() {
               <Route path="new" element={<New />} />
               <Route path="detail" element={<Detail />} />
               <Route path="update" element={<Update />} />
-              <Route path="/calendar" element={<ApplicationProgress />} />
+              <Route path="progress" element={<ApplicationProgress />} />
             </Routes>
           </ThemeProvider>
         </Container>
