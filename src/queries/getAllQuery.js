@@ -14,6 +14,7 @@ const GET_All = gql`
       country
       jobTitle
       salaryExpectation
+      applicationStatus
       cv
       createdAt
       gender
