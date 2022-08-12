@@ -25,6 +25,19 @@ const New = () => {
   const [jobTitle, setJobTitle] = useState("");
   const [file, setFile] = useState("");
   const [gender, setGender] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    age: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: "",
+    salaryExpectation: "",
+    jobTitle: "",
+    gender: "",
+  });
 
   const [createApplicant, { data, loading, error }] =
     useMutation(CREATE_APPLLICANT);

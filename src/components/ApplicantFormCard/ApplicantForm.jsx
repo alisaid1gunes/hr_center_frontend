@@ -43,7 +43,7 @@ const ApplicantForm = (props) => {
     update,
     mode,
   } = props.props;
-
+  const [cvMode, setCvMode] = useState(true);
   const [parseCv, { data, loading, error }] = useMutation(PARSE_PDF);
   console.log({ data, loading, error });
   const parse = (file) => {
@@ -54,6 +54,7 @@ const ApplicantForm = (props) => {
     });
   };
   const [countryList, setCountryList] = useState([]);
+
   const [cityList, setCityList] = useState([]);
   const genderList = [
     { id: 1, name: "Male" },
@@ -97,6 +98,7 @@ const ApplicantForm = (props) => {
   };
   const {
     control,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -116,13 +118,37 @@ const ApplicantForm = (props) => {
   }, []);
 
   useEffect(() => {
-    setFirstName(data?.parseCv?.firstName);
-    setLastName(data?.parseCv?.lastName);
-    setEmail(data?.parseCv?.email);
-    setAddress(data?.parseCv?.address);
-    setJobTitle(data?.parseCv?.jobTitle);
-    setPhone(data?.parseCv?.phone + "");
-  }, [data]);
+    if (cvMode) {
+      if (data?.parseCv?.firstName !== null) {
+        setFirstName(data?.parseCv?.firstName);
+        setValue("firstName", data?.parseCv?.firstName);
+      }
+      if (data?.parseCv?.lastName !== null) {
+        setLastName(data?.parseCv?.lastName);
+        setValue("lastName", data?.parseCv?.lastName);
+      }
+      if (data?.parseCv?.age !== null) {
+        setAge(data?.parseCv?.age);
+        setValue("age", data?.parseCv?.age);
+      }
+      if (data?.parseCv?.email !== null) {
+        setEmail(data?.parseCv?.email);
+        setValue("email", data?.parseCv?.email);
+      }
+      if (data?.parseCv?.phone !== null) {
+        setPhone(data?.parseCv?.phone + "");
+        setValue("phone", data?.parseCv?.phone);
+      }
+      if (data?.parseCv?.address !== null) {
+        setAddress(data?.parseCv?.address);
+        setValue("address", data?.parseCv?.address);
+      }
+      if (data?.parseCv?.jobTitle !== null) {
+        setJobTitle(data?.parseCv?.jobTitle);
+        setValue("jobTitle", data?.parseCv?.jobTitle);
+      }
+    }
+  }, [loading]);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -144,6 +170,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"firstName"}
             error={errors?.firstName}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -155,6 +183,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"lastName"}
             error={errors?.lastName}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"number"}
@@ -166,6 +196,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"age"}
             error={errors?.age}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -178,6 +210,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"gender"}
             error={errors?.gender}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -189,6 +223,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"email"}
             error={errors?.email}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -201,6 +237,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"phone"}
             error={errors?.phone}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -212,6 +250,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"jobTitle"}
             error={errors?.jobTitle}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"number"}
@@ -223,6 +263,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"salaryExpectation"}
             error={errors?.salaryExpectation}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -235,6 +277,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"country"}
             error={errors?.country}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -247,6 +291,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"city"}
             error={errors?.city}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <TextfieldItem
             type={"text"}
@@ -259,6 +305,8 @@ const ApplicantForm = (props) => {
             control={control}
             name={"address"}
             error={errors?.address}
+            cvMode={cvMode}
+            setCvMode={setCvMode}
           />
           <Grid
             item

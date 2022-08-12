@@ -17,6 +17,7 @@ const TextfieldItem = (props) => {
     name,
     isPhone,
     error,
+    setCvMode,
   } = props;
 
   return (
@@ -48,6 +49,9 @@ const TextfieldItem = (props) => {
                     console.log(e);
                     onChange(e);
                     setter(e);
+                    if (e.length !== 0) {
+                      setCvMode(false);
+                    }
                   }}
                   margin={"dense"}
                   type={type}
@@ -71,12 +75,18 @@ const TextfieldItem = (props) => {
             name={name}
             control={control}
             render={({ field: { onChange } }) => {
+              console.log(value);
               return (
                 <TextField
                   value={value}
                   onChange={(e) => {
+                    console.log("changed");
                     onChange(e.target.value);
                     setter(e.target.value);
+                    console.log(e.target.value.length);
+                    if (e.target.value.length !== 0) {
+                      setCvMode(false);
+                    }
                   }}
                   margin={"dense"}
                   type={type}
@@ -111,6 +121,9 @@ const TextfieldItem = (props) => {
                   onChange(item.name);
                   setter(item.name);
                   console.log(item.name);
+                  if (item.name.length !== 0) {
+                    setCvMode(false);
+                  }
                 }}
                 options={selectList}
                 value={value}
