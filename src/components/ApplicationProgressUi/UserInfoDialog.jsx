@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LinkIcon from '@mui/icons-material/Link';
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, gql } from "@apollo/client";
 import { GITHUB_USER_QUERY as GITHUB_USER} from '../../queries/githubUserQuery'
 import { ToGraphqlDateTime } from '../../utils';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -26,11 +26,21 @@ import axios from 'axios'
 import GoldMedal from '../../icons/GoldMedal';
 import SilverMedal from '../../icons/SilverMedal';
 import BronzeMedal from '../../icons/BronzeMedal';
+import getAllQuery from "../../queries/getAllQuery";
+
+const status = ['Application','Call','Interview','Offer']
+
+const UPDATE_STATUS = gql`
+  mutation ChangeStatus($data: ChangeStatusInput!) {
+    changeStatus(data: $data) 
+  }
+`;
 
 const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
     const [value, setValue] = useState('1');
     const [stackoverflowData, setStackoverflowData] = useState(undefined)
     const currentTime = ToGraphqlDateTime(Date().toString())
+    const [updateApplicant, result] = useMutation(UPDATE_STATUS);
     const [getGithubData,{ loading, error, data }] = useLazyQuery(GITHUB_USER, {
         variables: {
             login:login,
@@ -41,6 +51,27 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
             clientName: 'githubLink'
         }
     });
+    const handleProgress = () => {
+        updateApplicant({
+          variables: {
+            data: {
+              id: userData.id,
+              status: status[status.indexOf(userData.applicationStatus)+1]
+            }
+          },
+          refetchQueries: [
+            {
+              query: getAllQuery,
+              variables: {
+                take: 25,
+                page: 0,
+                search: '',
+              },
+            },
+            "Users",
+          ],
+        });
+    }
     const handleTabsChange = (event,newValue) => {
         setValue(newValue)
     }
@@ -71,6 +102,16 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
+        
+        {
+            userData.applicationStatus !== 'Offer'
+            &&
+            <DialogActions>
+              <Button variant='contained' disableFocusRipple sx={{bgcolor:'#5a5278 !important'}} onClick={() => { handleProgress(); handleClose()}}>
+                Progress
+              </Button>
+            </DialogActions>
+        }
         <DialogContent dividers={false}>
           <Grid container p={2}>
             <Grid item xs={12}>
@@ -126,12 +167,12 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
                         {
                             (loading && (data === null || data === undefined)) && !error 
                             ?
-                            <CircularProgress variant='indeterminant'/>
+                            <CircularProgress />
                             :
                             error || (data === null || data === undefined)
                             ?
                             <Grid>
-                                ERROR
+                                There is no github user
                             </Grid>
                             :
                             <Grid>
@@ -211,7 +252,7 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
                       <TabPanel value="3">
                       {
                             stackoverflowData
-                            &&
+                            ?
                             <Grid>
                                 <Typography variant='h6'>
                                     {stackoverflowData.userInfo[0].display_name}
@@ -297,6 +338,8 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
                                     </Grid>
                                 </Grid>
                             </Grid>
+                            :
+                            <CircularProgress />
                         }
                       </TabPanel>
                     </TabContext>
@@ -304,10 +347,6 @@ const UserInfoDialog = ({userData,open,setOpen,login = 'softwareVirus'}) => {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
       </Dialog>
     </Grid>
   )
