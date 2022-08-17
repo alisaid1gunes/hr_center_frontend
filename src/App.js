@@ -3,21 +3,17 @@ import New from "./pages/New";
 import { Route, Routes } from "react-router-dom";
 import {
   Container,
-  createMuiTheme,
   CssBaseline,
   ThemeProvider,
 } from "@mui/material";
+import {theme} from './theme'
 import DrawerMenu from "./components/DrawerMenu/DrawerMenu";
 import { Context } from "./context/AppContext";
 import Detail from "./pages/Detail";
 import Update from "./pages/Update";
+import ApplicationProgress from "./pages/ApplicationProgress";
 
 function App() {
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: ["Montserrat"].join(","),
-    },
-  });
   return (
     <div>
       <Context>
@@ -38,6 +34,7 @@ function App() {
               <Route path="new" element={<New />} />
               <Route path="detail" element={<Detail />} />
               <Route path="update" element={<Update />} />
+              <Route path="progress" element={<ApplicationProgress />} />
             </Routes>
           </ThemeProvider>
         </Container>

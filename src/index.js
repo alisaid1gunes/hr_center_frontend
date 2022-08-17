@@ -8,27 +8,53 @@ import {
   InMemoryCache,
   ApolloProvider,
   ApolloLink,
+  createHttpLink
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { BrowserRouter } from "react-router-dom";
+import { setContext } from '@apollo/client/link/context';
 import { CssBaseline } from "@mui/material";
 import { SearchContext } from "./context/AppContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const uploadLink = createUploadLink({ uri: "http://localhost:4000/graphql" });
-const client = new ApolloClient({
-  link: ApolloLink.from([uploadLink]),
-  cache: new InMemoryCache(),
+const githubLink = createHttpLink({
+  uri: 'https://api.github.com/graphql',
 });
+
+const serverLink = createHttpLink({
+  uri: 'https://hr-project-backend.herokuapp.com/graphql'
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = undefined;
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+
+const client = new ApolloClient({
+  link: ApolloLink.split(
+    operation => operation.getContext().clientName === 'githubLink',
+    authLink.concat(githubLink), //if above 
+    serverLink
+),
+  cache: new InMemoryCache()
+});
+
+
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
